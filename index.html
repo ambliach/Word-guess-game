@@ -37,18 +37,21 @@
     var guessesLeftText = document.getElementById("guessesLeft-text");
     var guessesSoFarText = document.getElementById("guessesSoFar-text");
     // This function is run whenever the user presses a key.
-    
-        winsText.textContent = "wins: " + wins;
-        lossesText.textContent = "losses: " + losses;
-        guessesLeftText.textContent = "guesses left: " + guessesLeft;
-        guessesSoFarText.textContent = "guesses so far: " + guessesSoFar
+    var computerGuess = computerChoices[Math.floor(Math.random() * computerChoices.length)];
+       
       
     document.onkeyup = function(event) {
       // Determines which key was pressed.
       var userGuess = event.key;
-      // Randomly chooses a choice from the options array. This is the Computer's guess.
       var computerGuess = computerChoices[Math.floor(Math.random() * computerChoices.length)];
+      // Randomly chooses a choice from the options array. This is the Computer's guess.
+     
       // This logic determines the outcome of the game (win/loss/tie), and increments the appropriate number
+      winsText.textContent = "wins: " + wins;
+        lossesText.textContent = "losses: " + losses;
+        guessesLeftText.textContent = "guesses left: " + guessesLeft;
+        guessesSoFarText.textContent = "guesses so far: " + guessesSoFar
+     
       if (userGuess===computerGuess){
           wins++;
         } else if (userGuess!==computerGuess) {
@@ -56,6 +59,11 @@
           guessesSoFar++;
           guessesLeft--;
         }
+
+      while (guessesLeft < 1){
+        losses++;
+        guessesLeft = 9;
+        } 
         // Hide the directions
         userChoiceText.textContent = "You chose: " + userGuess;
         computerChoiceText.textContent = "The computer chose: " + computerGuess;
